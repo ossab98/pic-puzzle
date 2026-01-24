@@ -6,7 +6,24 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6F780D3B2F23FB98004976A5 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 6F780D3A2F23FB98004976A5 /* RxCocoa */; };
+		6F780D3D2F23FB98004976A5 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 6F780D3C2F23FB98004976A5 /* RxRelay */; };
+		6F780D3F2F23FB98004976A5 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F780D3E2F23FB98004976A5 /* RxSwift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6F780D832F241289004976A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FAEDF862F23A77400E5EE35 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FAEDF8D2F23A77400E5EE35;
+			remoteInfo = "pic-puzzle";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		6F780D7F2F241289004976A5 /* pic-puzzleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pic-puzzleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FAEDF8E2F23A77400E5EE35 /* pic-puzzle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pic-puzzle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -21,6 +38,11 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6F780D802F241289004976A5 /* pic-puzzleTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "pic-puzzleTests";
+			sourceTree = "<group>";
+		};
 		6FAEDF902F23A77400E5EE35 /* pic-puzzle */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -32,20 +54,39 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		6FAEDF8B2F23A77400E5EE35 /* Frameworks */ = {
+		6F780D7C2F241289004976A5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6FAEDF8B2F23A77400E5EE35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F780D3F2F23FB98004976A5 /* RxSwift in Frameworks */,
+				6F780D3D2F23FB98004976A5 /* RxRelay in Frameworks */,
+				6F780D3B2F23FB98004976A5 /* RxCocoa in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F780D362F23FB4C004976A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6FAEDF852F23A77400E5EE35 = {
 			isa = PBXGroup;
 			children = (
 				6FAEDF902F23A77400E5EE35 /* pic-puzzle */,
+				6F780D802F241289004976A5 /* pic-puzzleTests */,
+				6F780D362F23FB4C004976A5 /* Frameworks */,
 				6FAEDF8F2F23A77400E5EE35 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				6FAEDF8E2F23A77400E5EE35 /* pic-puzzle.app */,
+				6F780D7F2F241289004976A5 /* pic-puzzleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +103,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6F780D7E2F241289004976A5 /* pic-puzzleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F780D852F241289004976A5 /* Build configuration list for PBXNativeTarget "pic-puzzleTests" */;
+			buildPhases = (
+				6F780D7B2F241289004976A5 /* Sources */,
+				6F780D7C2F241289004976A5 /* Frameworks */,
+				6F780D7D2F241289004976A5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F780D842F241289004976A5 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				6F780D802F241289004976A5 /* pic-puzzleTests */,
+			);
+			name = "pic-puzzleTests";
+			packageProductDependencies = (
+			);
+			productName = "pic-puzzleTests";
+			productReference = 6F780D7F2F241289004976A5 /* pic-puzzleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6FAEDF8D2F23A77400E5EE35 /* pic-puzzle */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6FAEDFA12F23A77600E5EE35 /* Build configuration list for PBXNativeTarget "pic-puzzle" */;
@@ -77,8 +142,6 @@
 				6FAEDF902F23A77400E5EE35 /* pic-puzzle */,
 			);
 			name = "pic-puzzle";
-			packageProductDependencies = (
-			);
 			productName = "pic-puzzle";
 			productReference = 6FAEDF8E2F23A77400E5EE35 /* pic-puzzle.app */;
 			productType = "com.apple.product-type.application";
@@ -93,6 +156,10 @@
 				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
+					6F780D7E2F241289004976A5 = {
+						CreatedOnToolsVersion = 26.2;
+						TestTargetID = 6FAEDF8D2F23A77400E5EE35;
+					};
 					6FAEDF8D2F23A77400E5EE35 = {
 						CreatedOnToolsVersion = 26.2;
 					};
@@ -107,17 +174,28 @@
 			);
 			mainGroup = 6FAEDF852F23A77400E5EE35;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				6F780D392F23FB98004976A5 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6FAEDF8F2F23A77400E5EE35 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				6FAEDF8D2F23A77400E5EE35 /* pic-puzzle */,
+				6F780D7E2F241289004976A5 /* pic-puzzleTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6F780D7D2F241289004976A5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6FAEDF8C2F23A77400E5EE35 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +206,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6F780D7B2F241289004976A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6FAEDF8A2F23A77400E5EE35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +222,59 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6F780D842F241289004976A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6FAEDF8D2F23A77400E5EE35 /* pic-puzzle */;
+			targetProxy = 6F780D832F241289004976A5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6F780D862F241289004976A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZCMN2N4RF7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.app.pic-puzzleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pic-puzzle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pic-puzzle";
+			};
+			name = Debug;
+		};
+		6F780D872F241289004976A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZCMN2N4RF7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.app.pic-puzzleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/pic-puzzle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/pic-puzzle";
+			};
+			name = Release;
+		};
 		6FAEDFA22F23A77600E5EE35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -263,7 +400,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -321,7 +458,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -334,6 +471,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6F780D852F241289004976A5 /* Build configuration list for PBXNativeTarget "pic-puzzleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F780D862F241289004976A5 /* Debug */,
+				6F780D872F241289004976A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6FAEDF892F23A77400E5EE35 /* Build configuration list for PBXProject "pic-puzzle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -353,6 +499,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6F780D392F23FB98004976A5 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6F780D3A2F23FB98004976A5 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F780D392F23FB98004976A5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		6F780D3C2F23FB98004976A5 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F780D392F23FB98004976A5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		6F780D3E2F23FB98004976A5 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F780D392F23FB98004976A5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6FAEDF862F23A77400E5EE35 /* Project object */;
 }
