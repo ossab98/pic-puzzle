@@ -48,6 +48,28 @@ class HomeViewController: UIViewController {
         return button
     }()
     
+    // Description label above the grid
+    private lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.textColor = .secondaryLabel
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    // Moves counter label below the grid
+    private lazy var movesLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .label
+        label.text = "Moves: 0"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     // Vertical stack containing all UI elements
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
@@ -93,9 +115,12 @@ class HomeViewController: UIViewController {
         puzzleGridView.translatesAutoresizingMaskIntoConstraints = false
         
         // Setup stack view
-        stackView.addArrangedSubviews([puzzleGridView, resetButton])
+        stackView.addArrangedSubview(descriptionLabel)
+        stackView.addArrangedSubview(puzzleGridView)
+        stackView.addArrangedSubview(movesLabel)
+        stackView.addArrangedSubview(resetButton)
         view.addSubview(stackView)
-
+        
         // Preview image view
         view.addSubview(previewImageView)
         
@@ -171,6 +196,15 @@ class HomeViewController: UIViewController {
                 self.refreshPuzzleGrid()
             })
             .disposed(by: disposeBag)
+        
+        // Bind moves count
+        viewModel.movesCount
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] count in
+                guard let self = self else { return }
+                self.movesLabel.text = "Moves: \(count)"
+            })
+            .disposed(by: disposeBag)
     }
     
     private func handleState(_ state: HomeViewModel.PuzzleViewState) {
@@ -178,22 +212,26 @@ class HomeViewController: UIViewController {
         case .default:
             puzzleGridView.alpha = 0
             previewImageView.alpha = 0
+            descriptionLabel.text = ""
             
         case .loading:
             loadingIndicator.startAnimating()
             puzzleGridView.alpha = 0
             previewImageView.alpha = 0
+            descriptionLabel.text = "Loading puzzle..."
             
         case .preview(let image):
             loadingIndicator.stopAnimating()
             previewImageView.image = image
             puzzleGridView.alpha = 0
+            descriptionLabel.text = "Memorize the image! Game starts in a few seconds..."
             UIView.animate(withDuration: 0.3) {
                 self.previewImageView.alpha = 1
             }
             
         case .ready:
             loadingIndicator.stopAnimating()
+            descriptionLabel.text = "Drag tiles to solve the puzzle!"
             UIView.animate(withDuration: 1.0) {
                 self.previewImageView.alpha = 0
                 self.puzzleGridView.alpha = 1
@@ -201,10 +239,12 @@ class HomeViewController: UIViewController {
             
         case .error(let message):
             loadingIndicator.stopAnimating()
+            descriptionLabel.text = ""
             previewImageView.alpha = 0
             showErrorAlert(message: message)
             
         case .completed:
+            descriptionLabel.text = "🎉 Puzzle completed!"
             showCompletionAlert()
         }
     }

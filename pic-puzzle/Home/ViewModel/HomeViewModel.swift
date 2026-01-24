@@ -34,6 +34,7 @@ class HomeViewModel {
     let screenState = BehaviorRelay<PuzzleViewState>(value: .default)
     let tiles = BehaviorRelay<[Tile]>(value: [])
     let tileImages = BehaviorRelay<[Int: UIImage]>(value: [:])
+    let movesCount = BehaviorRelay<Int>(value: 0)
     
     // MARK: - Private Properties
     private var puzzleGame: PuzzleGame!
@@ -68,6 +69,7 @@ class HomeViewModel {
         puzzleGame = PuzzleGame()
         tiles.accept(puzzleGame.tiles)
         tileImages.accept([:])
+        movesCount.accept(0)
         loadImageAndSetupPuzzle()
     }
     
@@ -82,6 +84,9 @@ class HomeViewModel {
         
         // Perform swap in game model
         puzzleGame.swapTiles(at: index1, with: index2)
+        
+        // Increment moves counter
+        movesCount.accept(movesCount.value + 1)
         
         // Update relay
         tiles.accept(puzzleGame.tiles)
@@ -116,6 +121,7 @@ class HomeViewModel {
     private func loadImageAndSetupPuzzle() {
         isLoading.accept(true)
         screenState.accept(.loading)
+        movesCount.accept(0)
         
         imageLoader.loadPuzzleImage { [weak self] image in
             guard let self = self else { return }
