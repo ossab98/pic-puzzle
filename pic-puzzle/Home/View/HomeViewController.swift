@@ -43,7 +43,6 @@ class HomeViewController: UIViewController {
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
-        button.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -177,6 +176,15 @@ class HomeViewController: UIViewController {
     // MARK: - Data Binding
     
     private func setObservers() {
+        // Bind button tap with throttle to prevent multiple rapid taps
+        resetButton.rx.tap
+            .throttle(.seconds(2), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.viewModel.resetPuzzle()
+            })
+            .disposed(by: disposeBag)
+        
         // Observe loading state
         viewModel.isLoading
             .observe(on: MainScheduler.instance)
@@ -287,12 +295,6 @@ class HomeViewController: UIViewController {
                 puzzleGridView.updateTile(at: index, with: tile, image: image)
             }
         }
-    }
-    
-    // MARK: - Actions
-    
-    @objc private func resetButtonTapped() {
-        viewModel.resetPuzzle()
     }
     
     // MARK: - Alerts
