@@ -266,7 +266,10 @@ Modify `gridSize` constant in:
 
 **Ossama Abdelwahab**
 
-- GitHub: [@ossab98](https://github.com/ossab98)
+- 📧 Email: [ossab98@gmail.com](mailto:ossab98@gmail.com)
+- 💼 LinkedIn: [linkedin.com/in/ossab98](https://www.linkedin.com/in/ossab98/)
+- 🐙 GitHub: [@ossab98](https://github.com/ossab98)
+- 📍 Location: Milan, Italy
 
 ## 📄 License
 
