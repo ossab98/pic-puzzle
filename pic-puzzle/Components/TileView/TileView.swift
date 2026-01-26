@@ -18,7 +18,7 @@ class TileView: UIView {
     /// Image view displaying the puzzle piece image
     private let imageView: UIImageView = {
         let iv = UIImageView()
-        iv.contentMode = .scaleAspectFill
+        iv.contentMode = .scaleToFill
         iv.clipsToBounds = true
         return iv
     }()
