@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
     // Button to start a new puzzle
     private lazy var resetButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("New Puzzle", for: .normal)
+        button.setTitle(viewModel.newPuzzleButtonTitle, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.textColor = .secondaryLabel
         label.numberOfLines = 0
-        label.text = "Loading puzzle..."
+        label.text = viewModel.loadingText
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +67,7 @@ class HomeViewController: UIViewController {
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .label
-        label.text = "Moves: 0"
+        label.text = viewModel.movesText(count: 0)
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -230,7 +230,7 @@ class HomeViewController: UIViewController {
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] count in
                 guard let self = self else { return }
-                self.movesLabel.text = "Moves: \(count)"
+                self.movesLabel.text = self.viewModel.movesText(count: count)
             })
             .disposed(by: disposeBag)
     }
@@ -246,21 +246,21 @@ class HomeViewController: UIViewController {
             loadingIndicator.startAnimating()
             puzzleGridView.alpha = 0
             previewImageView.alpha = 0
-            descriptionLabel.text = "Loading puzzle..."
+            descriptionLabel.text = viewModel.loadingText
             
         case .preview(let image):
             loadingIndicator.stopAnimating()
             previewImageView.image = image
             puzzleGridView.alpha = 0
-            descriptionLabel.text = "Memorize the image! Game starts in a few seconds..."
+            descriptionLabel.text = viewModel.previewText
             UIView.animate(withDuration: 0.3) {
                 self.previewImageView.alpha = 1
             }
             
         case .ready:
             loadingIndicator.stopAnimating()
-            descriptionLabel.text = "Drag tiles to solve the puzzle!"
-            UIView.animate(withDuration: 1.0) {
+            descriptionLabel.text = viewModel.playingText
+            UIView.animate(withDuration: 0.3) {
                 self.previewImageView.alpha = 0
                 self.puzzleGridView.alpha = 1
             }
@@ -272,7 +272,7 @@ class HomeViewController: UIViewController {
             showErrorAlert(message: message)
             
         case .completed:
-            descriptionLabel.text = "🎉 Puzzle completed!"
+            descriptionLabel.text = viewModel.completedText
             showCompletionAlert()
         }
     }
@@ -301,29 +301,29 @@ class HomeViewController: UIViewController {
     
     private func showErrorAlert(message: String) {
         let alert = UIAlertController(
-            title: "Error",
+            title: viewModel.errorAlertTitle,
             message: message,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Retry", style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: viewModel.retryButtonTitle, style: .default) { [weak self] _ in
             guard let self = self else { return }
             self.viewModel.loadPuzzle()
         })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: viewModel.cancelButtonTitle, style: .cancel))
         present(alert, animated: true)
     }
     
     private func showCompletionAlert() {
         let alert = UIAlertController(
-            title: "🎉 Congratulations!",
-            message: "You've completed the puzzle!",
+            title: viewModel.completionAlertTitle,
+            message: viewModel.completionAlertMessage,
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "New Puzzle", style: .default) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: viewModel.newPuzzleButtonTitle, style: .default) { [weak self] _ in
             guard let self = self else { return }
             self.viewModel.resetPuzzle()
         })
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+        alert.addAction(UIAlertAction(title: viewModel.okButtonTitle, style: .cancel))
         present(alert, animated: true)
     }
 }

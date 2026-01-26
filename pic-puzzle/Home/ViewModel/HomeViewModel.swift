@@ -42,8 +42,25 @@ class HomeViewModel {
     private var previewTimer: DispatchWorkItem?
     
     // MARK: - Public Properties
-    var screenTitle:   String { "TileSwap" }
-    var isCompleted:   Bool { puzzleGame?.isCompleted ?? false }
+    
+    // UI Text Properties
+    var screenTitle: String { "TileSwap" }
+    var newPuzzleButtonTitle: String { "New Puzzle" }
+    var loadingText: String { "Loading puzzle..." }
+    var previewText: String { "Memorize the image! Game starts in a few seconds..." }
+    var playingText: String { "Drag tiles to solve the puzzle!" }
+    var completedText: String { "🎉 Puzzle completed!" }
+    func movesText(count: Int) -> String { "Moves: \(count)" }
+    
+    // Alert Properties
+    var errorAlertTitle: String { "Error" }
+    var retryButtonTitle: String { "Retry" }
+    var cancelButtonTitle: String { "Cancel" }
+    var completionAlertTitle: String { "🎉 Congratulations!" }
+    var completionAlertMessage: String { "You've completed the puzzle!" }
+    var okButtonTitle: String { "OK" }
+    
+    var isCompleted: Bool { puzzleGame?.isCompleted ?? false }
     var numberOfTiles: Int { tiles.value.count }
     
     // MARK: - Initialization
