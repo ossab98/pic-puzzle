@@ -20,6 +20,23 @@ class HomeViewModel {
         case ready
         case error(message: String)
         case completed
+        
+        var descriptionText: String {
+            switch self {
+            case .default:
+                return ""
+            case .loading:
+                return "Loading puzzle..."
+            case .preview:
+                return "Memorize the image! Game starts in a few seconds..."
+            case .ready:
+                return "Drag tiles to solve the puzzle!"
+            case .error:
+                return ""
+            case .completed:
+                return "🎉 Puzzle completed!"
+            }
+        }
     }
 
     // MARK: - Constants
@@ -46,10 +63,6 @@ class HomeViewModel {
     // UI Text Properties
     var screenTitle: String { "TileSwap" }
     var newPuzzleButtonTitle: String { "New Puzzle" }
-    var loadingText: String { "Loading puzzle..." }
-    var previewText: String { "Memorize the image! Game starts in a few seconds..." }
-    var playingText: String { "Drag tiles to solve the puzzle!" }
-    var completedText: String { "🎉 Puzzle completed!" }
     func movesText(count: Int) -> String { "Moves: \(count)" }
     
     // Alert Properties

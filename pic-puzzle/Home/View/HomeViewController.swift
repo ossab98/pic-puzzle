@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
         label.font = .systemFont(ofSize: 17, weight: .medium)
         label.textColor = .secondaryLabel
         label.numberOfLines = 0
-        label.text = viewModel.loadingText
+        label.text = ""
         label.setContentHuggingPriority(.required, for: .vertical)
         label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -236,30 +236,29 @@ class HomeViewController: UIViewController {
     }
     
     private func handleState(_ state: HomeViewModel.PuzzleViewState) {
+        // Update description label with state text
+        descriptionLabel.text = state.descriptionText
+        
         switch state {
         case .default:
             puzzleGridView.alpha = 0
             previewImageView.alpha = 0
-            descriptionLabel.text = ""
             
         case .loading:
             loadingIndicator.startAnimating()
             puzzleGridView.alpha = 0
             previewImageView.alpha = 0
-            descriptionLabel.text = viewModel.loadingText
             
         case .preview(let image):
             loadingIndicator.stopAnimating()
             previewImageView.image = image
             puzzleGridView.alpha = 0
-            descriptionLabel.text = viewModel.previewText
             UIView.animate(withDuration: 0.3) {
                 self.previewImageView.alpha = 1
             }
             
         case .ready:
             loadingIndicator.stopAnimating()
-            descriptionLabel.text = viewModel.playingText
             UIView.animate(withDuration: 0.3) {
                 self.previewImageView.alpha = 0
                 self.puzzleGridView.alpha = 1
@@ -267,12 +266,10 @@ class HomeViewController: UIViewController {
             
         case .error(let message):
             loadingIndicator.stopAnimating()
-            descriptionLabel.text = ""
             previewImageView.alpha = 0
             showErrorAlert(message: message)
             
         case .completed:
-            descriptionLabel.text = viewModel.completedText
             showCompletionAlert()
         }
     }
