@@ -52,9 +52,12 @@ class HomeViewController: UIViewController {
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.font = .systemFont(ofSize: 17, weight: .medium)
         label.textColor = .secondaryLabel
         label.numberOfLines = 0
+        label.text = "Loading puzzle..."
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -66,6 +69,8 @@ class HomeViewController: UIViewController {
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .label
         label.text = "Moves: 0"
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -74,7 +79,7 @@ class HomeViewController: UIViewController {
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
-        stack.spacing = 30
+        stack.spacing = 20
         stack.alignment = .fill
         stack.distribution = .fill
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -103,6 +108,16 @@ class HomeViewController: UIViewController {
         setObservers()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { _ in
+            self.view.layoutIfNeeded()
+            self.puzzleGridView.setNeedsLayout()
+            self.puzzleGridView.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
     // MARK: - Setup
     
     private func setupViews() {
@@ -127,19 +142,24 @@ class HomeViewController: UIViewController {
         // Loading indicator
         view.addSubview(loadingIndicator)
 
+        let stackWidthConstraint = stackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -40)
+        stackWidthConstraint.priority = .defaultHigh
+        
         NSLayoutConstraint.activate([
-            // Stack view - centered with padding
+            // Stack view - centered both H and V with flexible edges
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24),
-            stackView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
-            stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -24),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).withPriority(.defaultLow),
+            stackView.topAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            stackView.leadingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, constant: -40),
+            stackWidthConstraint,
             
-            // Puzzle grid - square aspect ratio only
+            // Puzzle grid - square aspect ratio, adapts to available width
             puzzleGridView.heightAnchor.constraint(equalTo: puzzleGridView.widthAnchor),
             
-            // Reset button - fixed height only
+            // Reset button - fixed height
             resetButton.heightAnchor.constraint(equalToConstant: 50),
             
             // Preview image view - same position as puzzle grid
