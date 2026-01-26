@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F6721222F25ADA500F71399 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F6721212F25ADA500F71399 /* RxSwift */; };
+		6F6721242F25ADAB00F71399 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 6F6721232F25ADAB00F71399 /* RxRelay */; };
+		6F6721262F25ADAF00F71399 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 6F6721252F25ADAF00F71399 /* RxCocoa */; };
+		6F6721282F25AE1D00F71399 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 6F6721272F25AE1D00F71399 /* RxTest */; };
 		6F780D3B2F23FB98004976A5 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 6F780D3A2F23FB98004976A5 /* RxCocoa */; };
 		6F780D3D2F23FB98004976A5 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 6F780D3C2F23FB98004976A5 /* RxRelay */; };
 		6F780D3F2F23FB98004976A5 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F780D3E2F23FB98004976A5 /* RxSwift */; };
@@ -58,6 +62,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F6721282F25AE1D00F71399 /* RxTest in Frameworks */,
+				6F6721262F25ADAF00F71399 /* RxCocoa in Frameworks */,
+				6F6721242F25ADAB00F71399 /* RxRelay in Frameworks */,
+				6F6721222F25ADA500F71399 /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +129,10 @@
 			);
 			name = "pic-puzzleTests";
 			packageProductDependencies = (
+				6F6721212F25ADA500F71399 /* RxSwift */,
+				6F6721232F25ADAB00F71399 /* RxRelay */,
+				6F6721252F25ADAF00F71399 /* RxCocoa */,
+				6F6721272F25AE1D00F71399 /* RxTest */,
 			);
 			productName = "pic-puzzleTests";
 			productReference = 6F780D7F2F241289004976A5 /* pic-puzzleTests.xctest */;
@@ -512,6 +524,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6F6721212F25ADA500F71399 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F780D392F23FB98004976A5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		6F6721232F25ADAB00F71399 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F780D392F23FB98004976A5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		6F6721252F25ADAF00F71399 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F780D392F23FB98004976A5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		6F6721272F25AE1D00F71399 /* RxTest */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F780D392F23FB98004976A5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxTest;
+		};
 		6F780D3A2F23FB98004976A5 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F780D392F23FB98004976A5 /* XCRemoteSwiftPackageReference "RxSwift" */;
