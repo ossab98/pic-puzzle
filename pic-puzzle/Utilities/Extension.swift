@@ -18,3 +18,13 @@ extension Collection {
         return indices.contains(index) ? self[index] : nil
     }
 }
+
+// MARK: - NSLayoutConstraint Extension
+
+extension NSLayoutConstraint {
+    /// Helper to set priority on constraint in a chainable way
+    func withPriority(_ priority: UILayoutPriority) -> NSLayoutConstraint {
+        self.priority = priority
+        return self
+    }
+}
