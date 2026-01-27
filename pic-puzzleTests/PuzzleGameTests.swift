@@ -19,8 +19,10 @@ final class PuzzleGameTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Create a fresh instance before each test
-        sut = PuzzleGame()
+        // Use shared singleton instance
+        sut = PuzzleGame.shared
+        // Reset game to ensure clean state for each test
+        sut.resetGame()
     }
     
     override func tearDown() {
@@ -31,15 +33,17 @@ final class PuzzleGameTests: XCTestCase {
     
     // MARK: - Initialization Tests
     
-    /// Test that puzzle initializes with correct number of tiles (3x3 = 9 tiles)
-    func testPuzzleGame_WhenInitialized_ShouldHaveNineTiles() {
-        // Given: A new puzzle game (created in setUp)
+    /// Test that puzzle initializes with correct number of tiles based on GameConfiguration
+    func testPuzzleGame_WhenInitialized_ShouldHaveCorrectNumberOfTiles() {
+        // Given: A new puzzle game (created in setUp) and expected count from configuration
+        let expectedTilesCount = GameConfiguration.totalTiles
         
         // When: We check the tiles count
         let tilesCount = sut.tiles.count
         
-        // Then: Should have exactly 9 tiles
-        XCTAssertEqual(tilesCount, 9, "Puzzle should have 9 tiles for a 3x3 grid")
+        // Then: Should have correct number of tiles based on grid size
+        XCTAssertEqual(tilesCount, expectedTilesCount, 
+                       "Puzzle should have \(expectedTilesCount) tiles for a \(GameConfiguration.gridSize)x\(GameConfiguration.gridSize) grid")
     }
     
     /// Test that tiles are shuffled during initialization (not in solved state)

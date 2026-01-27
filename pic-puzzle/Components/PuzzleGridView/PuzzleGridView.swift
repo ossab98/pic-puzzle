@@ -21,7 +21,8 @@ protocol PuzzleGridViewDelegate: AnyObject {
 
 // MARK: - PuzzleGridView
 
-/// Custom UIView that displays a 3x3 grid of puzzle tiles with drag-and-drop swap functionality
+/// Custom UIView that displays a dynamic grid of puzzle tiles with drag-and-drop swap functionality
+/// Grid size is determined by GameConfiguration.gridSize (e.g., 3x3, 4x4, 5x5)
 /// Manages tile layout, user interactions, and visual animations for tile swapping
 class PuzzleGridView: UIView {
     
@@ -32,11 +33,11 @@ class PuzzleGridView: UIView {
     
     // MARK: - Private Properties
     
-    /// Array of 9 tile views arranged in a 3x3 grid layout
+    /// Array of tile views arranged in a grid layout (size based on GameConfiguration)
     private var tileViews: [TileView] = []
     
-    /// Number of tiles per row/column (always 3 for 3x3 grid)
-    private let gridSize = 3
+    /// Number of tiles per row/column (dynamically set from GameConfiguration)
+    private let gridSize: Int
     
     /// Visual spacing between tiles in points
     private let spacing: CGFloat = 4
@@ -50,24 +51,28 @@ class PuzzleGridView: UIView {
     // MARK: - Initialization
     
     override init(frame: CGRect) {
+        self.gridSize = GameConfiguration.gridSize
         super.init(frame: frame)
         setupGrid()
     }
     
     required init?(coder: NSCoder) {
+        self.gridSize = GameConfiguration.gridSize
         super.init(coder: coder)
         setupGrid()
     }
     
     // MARK: - Setup
     
-    /// Creates and configures the 9 tile views with pan gesture recognizers
+    /// Creates and configures tile views with pan gesture recognizers
+    /// Number of tiles is determined by gridSize² (e.g., 3x3=9 tiles, 4x4=16 tiles)
     /// Sets up the initial grid structure with empty tiles ready to be populated
     private func setupGrid() {
         backgroundColor = .systemBackground
         
-        // Create 9 tile views (3x3 grid = 9 tiles)
-        for i in 0..<(gridSize * gridSize) {
+        let totalTiles = gridSize * gridSize
+        // Create tile views based on grid size
+        for i in 0..<totalTiles {
             let tileView = TileView()
             tileView.tag = i // Tag for easy identification during debugging
             
@@ -88,7 +93,8 @@ class PuzzleGridView: UIView {
         layoutTiles()
     }
     
-    /// Calculates and positions all tiles in a 3x3 grid with proper spacing
+    /// Calculates and positions all tiles in a grid with proper spacing
+    /// Grid dimensions are determined by GameConfiguration.gridSize
     /// Ensures tiles are square and evenly distributed within the view bounds
     private func layoutTiles() {
         // Calculate available space after accounting for spacing between tiles

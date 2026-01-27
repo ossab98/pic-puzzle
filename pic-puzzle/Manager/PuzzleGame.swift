@@ -9,18 +9,33 @@ import UIKit
 
 // MARK: - PuzzleGame
 
-/// Core game logic manager for the puzzle game
+/// Core game logic manager for the puzzle game (Singleton)
 /// Handles tile management, swap operations, position tracking, and completion state
-/// Supports save/load functionality for game persistence
+/// Use shared instance to avoid memory issues and ensure single game state
 class PuzzleGame {
+    
+    // MARK: - Singleton
+    
+    /// Shared instance of PuzzleGame (Singleton pattern)
+    static let shared = PuzzleGame()
+    
+    /// Private initializer to prevent multiple instances
+    private init() {
+        self.gridSize = GameConfiguration.gridSize
+        let totalTiles = GameConfiguration.totalTiles
+        
+        // Initialize tiles with sequential IDs (each tile knows its correct position)
+        self.tiles = (0..<totalTiles).map { Tile(id: $0, correctPosition: $0, currentPosition: $0) }
+        shuffleTiles()
+    }
     
     // MARK: - Properties
     
     /// Array of tiles in their current grid positions (index represents position)
     private(set) var tiles: [Tile]
     
-    /// Size of the puzzle grid (3 = 3x3 = 9 tiles)
-    private let gridSize = 3
+    /// Size of the puzzle grid (dynamically set from GameConfiguration)
+    private let gridSize: Int
     
     // MARK: - Computed Properties
     
@@ -29,13 +44,14 @@ class PuzzleGame {
         return tiles.allSatisfy { $0.isInCorrectPosition }
     }
     
-    // MARK: - Initialization
+    // MARK: - Public Methods
     
-    /// Creates a new puzzle game with shuffled tiles
-    /// Initializes 9 tiles (3x3 grid) and shuffles them into random positions
-    init() {
-        // Initialize 9 tiles with sequential IDs (each tile knows its correct position)
-        self.tiles = (0..<9).map { Tile(id: $0, correctPosition: $0, currentPosition: $0) }
+    /// Resets the game with a new shuffled puzzle
+    /// Call this to start a new game without creating a new instance
+    func resetGame() {
+        // Reinitialize tiles
+        let totalTiles = GameConfiguration.totalTiles
+        self.tiles = (0..<totalTiles).map { Tile(id: $0, correctPosition: $0, currentPosition: $0) }
         shuffleTiles()
     }
     
@@ -84,7 +100,7 @@ class PuzzleGame {
     }
     
     /// Retrieves the tile at a specific grid position
-    /// - Parameter index: Grid position index (0-8 for 3x3 grid)
+    /// - Parameter index: Grid position index (e.g., 0-8 for 3x3 grid, 0-15 for 4x4 grid)
     /// - Returns: The tile at that position, or nil if index is invalid
     func getTile(at index: Int) -> Tile? {
         return tiles[safe: index]

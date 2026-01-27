@@ -11,7 +11,7 @@ A classic sliding tile puzzle game for iOS where players arrange scrambled image
 
 ## 📱 Features
 
-- **3x3 Puzzle Grid**: 9 tiles to arrange into the correct order
+- **Configurable Grid Size**: Dynamic grid (default 3x3 = 9 tiles, configurable to 4x4, 5x5, etc.)
 - **Image Preview**: Shows the complete image for 5 seconds before gameplay
 - **Smart Tile Locking**: Tiles automatically lock when placed in correct positions
 - **Moves Counter**: Track your progress with a real-time moves counter
@@ -90,10 +90,11 @@ pic-puzzle/
 │   └── Model/
 │       └── Tile.swift                # Tile data model
 ├── Manager/
-│   └── PuzzleGame.swift              # Core game engine
+│   ├── PuzzleGame.swift              # Core game engine
+│   └── GameConfiguration.swift       # Grid size configuration
 ├── Components/
 │   ├── PuzzleGridView/
-│   │   └── PuzzleGridView.swift     # 3x3 grid container
+│   │   └── PuzzleGridView.swift     # Dynamic grid container
 │   └── TileView/
 │       └── TileView.swift            # Single tile UI
 ├── Utilities/
@@ -190,6 +191,7 @@ See [`pic-puzzleTests/README.md`](pic-puzzleTests/README.md) for detailed test d
 ### Swap Examples
 
 You can swap any unlocked tiles:
+
 - Swap tile 0 with tile 8 (opposite corners) ✅
 - Swap tile 1 with tile 7 (any position) ✅
 - Cannot swap locked tiles (green border) ❌
@@ -234,11 +236,21 @@ The app uses **Auto Layout** with adaptive constraints:
 
 ### Changing Grid Size
 
-Modify `gridSize` constant in:
+Simply modify the `gridSize` value in `Manager/GameConfiguration.swift`:
 
-- `PuzzleGame.swift`
-- `HomeViewModel.swift`
-- Update UI constraints accordingly
+```swift
+enum GameConfiguration {
+    static let gridSize: Int = 3  // Change to 4, 5, etc.
+}
+```
+
+**Available difficulty levels:**
+
+- `3` = 3x3 grid (9 tiles) - Easy ⭐
+- `4` = 4x4 grid (16 tiles) - Medium ⭐⭐
+- `5` = 5x5 grid (25 tiles) - Hard ⭐⭐⭐
+
+All components (PuzzleGame, PuzzleGridView, ImageSlicer) automatically adapt to the new grid size.
 
 ## 📝 Code Quality
 

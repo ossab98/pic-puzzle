@@ -43,7 +43,6 @@ class HomeViewModel {
     private enum Constants {
         static let previewDuration: TimeInterval = 5.0
         static let completionDelay: TimeInterval = 0.5
-        static let gridSize = 3
     }
     
     // MARK: - Relays
@@ -54,7 +53,7 @@ class HomeViewModel {
     let movesCount = BehaviorRelay<Int>(value: 0)
     
     // MARK: - Private Properties
-    private var puzzleGame: PuzzleGame!
+    private let puzzleGame = PuzzleGame.shared
     private let imageLoader = ImageLoader.shared
     private var previewTimer: DispatchWorkItem?
     
@@ -73,7 +72,7 @@ class HomeViewModel {
     var completionAlertMessage: String { "You've completed the puzzle!" }
     var okButtonTitle: String { "OK" }
     
-    var isCompleted: Bool { puzzleGame?.isCompleted ?? false }
+    var isCompleted: Bool { puzzleGame.isCompleted }
     var numberOfTiles: Int { tiles.value.count }
     
     // MARK: - Initialization
@@ -89,14 +88,14 @@ class HomeViewModel {
         isLoading.accept(true)
         screenState.accept(.loading)
         
-        puzzleGame = PuzzleGame()
+        puzzleGame.resetGame()
         tiles.accept(puzzleGame.tiles)
         loadImageAndSetupPuzzle()
     }
     
     /// Reset puzzle and start fresh
     func resetPuzzle() {
-        puzzleGame = PuzzleGame()
+        puzzleGame.resetGame()
         tiles.accept(puzzleGame.tiles)
         tileImages.accept([:])
         movesCount.accept(0)
@@ -169,7 +168,8 @@ class HomeViewModel {
     }
     
     private func setupPuzzleWithImage(_ image: UIImage) {
-        let slicedImages = ImageSlicer.sliceImage(image, into: Constants.gridSize)
+        let gridSize = GameConfiguration.gridSize
+        let slicedImages = ImageSlicer.sliceImage(image, into: gridSize)
         
         // Create dictionary mapping tile ID to its image slice
         let imageDict = Dictionary(uniqueKeysWithValues: slicedImages.enumerated().map { ($0.offset, $0.element) })
