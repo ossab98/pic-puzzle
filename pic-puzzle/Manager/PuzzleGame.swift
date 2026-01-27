@@ -42,9 +42,7 @@ class PuzzleGame {
     // MARK: - Game Logic
     
     /// Checks if two tiles at given indices can be swapped
-    /// Checks if two tiles can be swapped
     /// Tiles cannot be swapped if either is locked (already in correct position)
-    /// Note: Adjacency is validated by the UI layer (PuzzleGridView) based on visual positions
     /// - Parameters:
     ///   - index1: Grid index of first tile
     ///   - index2: Grid index of second tile

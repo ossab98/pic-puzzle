@@ -14,9 +14,9 @@ A classic sliding tile puzzle game for iOS where players arrange scrambled image
 - **3x3 Puzzle Grid**: 9 tiles to arrange into the correct order
 - **Image Preview**: Shows the complete image for 5 seconds before gameplay
 - **Smart Tile Locking**: Tiles automatically lock when placed in correct positions
-- **Adjacency Validation**: Only adjacent tiles can be swapped (horizontally or vertically)
 - **Moves Counter**: Track your progress with a real-time moves counter
 - **Drag & Drop**: Intuitive drag-and-drop gesture for swapping tiles
+- **Free Swapping**: Swap any unlocked tile with any other unlocked tile
 - **Adaptive Layout**: Responsive UI that works in portrait and landscape orientations
 - **Random Image Selection**: 23 built-in images for variety
 - **Completion Detection**: Celebration alert when puzzle is solved
@@ -25,7 +25,7 @@ A classic sliding tile puzzle game for iOS where players arrange scrambled image
 
 1. **Launch**: App starts by loading a random image
 2. **Preview**: Memorize the complete image (shown for 5 seconds)
-3. **Solve**: Drag tiles to swap adjacent pieces
+3. **Solve**: Drag and drop tiles to swap any unlocked pieces
 4. **Win**: Arrange all tiles to recreate the original image
 5. **New Puzzle**: Tap "New Puzzle" to start over with a new image
 
@@ -170,8 +170,8 @@ See [`pic-puzzleTests/README.md`](pic-puzzleTests/README.md) for detailed test d
 
 ### Tile Swapping Rules
 
-1. **Adjacency**: Only horizontally or vertically adjacent tiles can swap
-2. **Lock State**: Tiles in correct positions are locked and can't move
+1. **Free Swapping**: Any unlocked tile can be swapped with any other unlocked tile
+2. **Lock State**: Tiles in correct positions are automatically locked and can't move
 3. **Position Tracking**: Each tile knows its current and correct position
 4. **Auto-Lock**: Tiles automatically lock when placed correctly
 
@@ -187,10 +187,12 @@ See [`pic-puzzleTests/README.md`](pic-puzzleTests/README.md) for detailed test d
 └───┴───┴───┘
 ```
 
-### Adjacency Examples
+### Swap Examples
 
-- **Valid swaps**: 0↔1, 0↔3, 4↔5, 4↔7 (adjacent)
-- **Invalid swaps**: 0↔8, 0↔5, 1↔6 (not adjacent)
+You can swap any unlocked tiles:
+- Swap tile 0 with tile 8 (opposite corners) ✅
+- Swap tile 1 with tile 7 (any position) ✅
+- Cannot swap locked tiles (green border) ❌
 
 ## 📐 Responsive Design
 
