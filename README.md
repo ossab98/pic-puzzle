@@ -9,6 +9,26 @@
 
 A classic sliding tile puzzle game for iOS where players arrange scrambled image tiles to recreate the original picture. Built with Swift, UIKit, and RxSwift following MVVM architecture.
 
+## 📸 Screenshots
+
+### iPhone
+<p align="center">
+  <img src="Screenshots/iphone-splash.png" width="200" alt="iPhone Splash Screen"/>
+  <img src="Screenshots/iphone-preview.png" width="200" alt="iPhone Preview"/>
+  <img src="Screenshots/iphone-gameplay.png" width="200" alt="iPhone Gameplay"/>
+  <img src="Screenshots/iphone-completed.png" width="200" alt="iPhone Completed"/>
+</p>
+
+### iPad
+<p align="center">
+  <img src="Screenshots/ipad-splash.png" width="300" alt="iPad Splash Screen"/>
+  <img src="Screenshots/ipad-preview.png" width="300" alt="iPad Preview"/>
+</p>
+<p align="center">
+  <img src="Screenshots/ipad-gameplay.png" width="300" alt="iPad Gameplay"/>
+  <img src="Screenshots/ipad-completed.png" width="300" alt="iPad Completed"/>
+</p>
+
 ## 📱 Features
 
 - **Configurable Grid Size**: Dynamic grid (default 3x3 = 9 tiles, configurable to 4x4, 5x5, etc.)
