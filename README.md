@@ -18,7 +18,7 @@ A classic sliding tile puzzle game for iOS where players arrange scrambled image
 - **Drag & Drop**: Intuitive drag-and-drop gesture for swapping tiles
 - **Free Swapping**: Swap any unlocked tile with any other unlocked tile
 - **Adaptive Layout**: Responsive UI that works in portrait and landscape orientations
-- **Random Image Selection**: 23 built-in images for variety
+- **Random Image Selection**: 20 built-in images for variety
 - **Completion Detection**: Celebration alert when puzzle is solved
 
 ## 🎮 How to Play
