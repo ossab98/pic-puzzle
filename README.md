@@ -54,11 +54,11 @@ A classic sliding tile puzzle game for iOS where players arrange scrambled image
 ### MVVM Pattern
 
 ```
+Model (PuzzleGame, Tile)
+    ↓
 View (UIViewController)
     ↓
 ViewModel (HomeViewModel)
-    ↓
-Model (PuzzleGame, Tile)
 ```
 
 ### Key Components
